@@ -22,6 +22,7 @@ function showAlert(text = "", type) {
 
 window.addEventListener("load", function() {
     loadItems();
+    loadFicheros();
 });
 
 // Funciom para iniciar Session
@@ -134,16 +135,18 @@ document.getElementById("image").addEventListener("change", function() {
 
 // Funcion para cambiar al formulario de ficheros
 $("#Archivos").click(function() {
-    $("#FitcherosForm").attr("style", "display: block");
-    $("#listItems").attr("style", "display: none");
-    $("#itemsForm").attr("style", "display: none");
+    $("#FitcherosForm").show();
+    $("#listFicheros").show();
+    $("#listItems").hide();
+    $("#itemsForm").hide();
 });
 
 // Funcion para cambiar al formulario de ficheros
 $("#images").click(function() {
-    $("#FitcherosForm").attr("style", "display: none");
-    $("#itemsForm").attr("style", "display: block");
-    $("#listItems").attr("style", "display: block");
+    $("#FitcherosForm").hide();
+    $("#listFicheros").hide();
+    $("#itemsForm").show();
+    $("#listItems").show();
 });
 
 

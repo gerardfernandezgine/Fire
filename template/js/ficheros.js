@@ -31,7 +31,7 @@ function updateFitxero(id, doc) {
         .then(() => {
             loadFicheros();
 
-            $("#elementId").val() = "";
+            $("#elementIdFitxer").val() = "";
             $("tituloFitxero").val() = "";
             $("contenidoFitxero").value = "";
             $("fitxer").value = "";
@@ -47,28 +47,33 @@ function updateFitxero(id, doc) {
 // Funcion para cargar los items de la BBDD
 function loadFicheros() {
     selectAll(fitcheros, "title")
-        //selectWhere(items, "title", "==", "ruben")
-        .then((arrayFitxeros) => {
-            console.log(arrayFitxeros)
-            $("#listFicheros").html() = `<tr>
-    											<th class="text-white">Títol</th>
-    											<th class="text-white">Contingut</th>
-    											<th></th>
-    										</tr>`;
+
+    //selectWhere(items, "title", "==", "ruben")
+    .then((arrayFitxeros) => {
+            $("#listFicheros").html("<tr>" +
+                "<th class = 'text-white'> Títol </th> " +
+                "<th class = 'text-white'> Contingut </th>" +
+                "<th></th>" +
+                "</tr>");
+
+
             arrayFitxeros.forEach((doc) => {
-                $("#listFicheros").html() += `<tr>
-                                                    <td>${doc.data().title}</td>
-                                                    <td>${doc.data().content}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger float-right" onclick="eliminar('${doc.id}')">
-                                                            Eliminar
-                                                        </button>
-                                                        <button type="button" class="btn btn-primary mr-2 float-right" onclick="editItem('${doc.id}')">
-                                                            Editar
-                                                        </button>
-                                                    </td>
-                                                </tr>`;
+                $("#listFicheros").append("<tr>" +
+
+                    "<td>" + doc.data().title + "</td>" +
+                    "<td>" + doc.data().content + "</td>" +
+                    "<td>" +
+                    "<button type='button' class='btn btn-danger float-right' onclick='" + deleteFitxer($(doc.id)) + "'>" +
+                    "Eliminar" +
+                    "</button>" +
+                    "<button type='button' class='btn btn-primary mr-2 float-right' onclick='" + updateFitxero($(doc.id), $(doc.fitxer)) + "'>" +
+                    "Editar" +
+                    "</button>" +
+                    "</td>" +
+                    "</tr>");
+                console.log(doc.data().title)
             })
+
         })
         .catch(() => {
             showAlert("Error al mostrar els fitxers", "alert-danger");

@@ -7,7 +7,7 @@ function addItem(doc) {
     add(items, doc)
         .then(() => {
             loadItems();
-
+            loadFicheros();
             document.getElementById("title").value = "";
             document.getElementById("content").value = "";
             document.getElementById("image").value = "";
@@ -24,6 +24,7 @@ function deleteItem(id) {
     deleteById(items, id)
         .then(() => {
             loadItems();
+            loadFicheros();
             showAlert("Element eliminat correctament", "alert-success");
         }).catch(() => {
             showAlert("Error al intentar eliminar l'element", "alert-danger");
@@ -89,7 +90,6 @@ function updateItem(id, doc) {
     updateById(items, id, doc)
         .then(() => {
             loadItems();
-
             document.getElementById("elementId").value = "";
             document.getElementById("title").value = "";
             document.getElementById("content").value = "";
