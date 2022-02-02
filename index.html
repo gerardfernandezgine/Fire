@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ruedas Nil C. i Gerard F.</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+    <link rel="shortcut icon" href="template/img/favicon.png" type="image/.png">
+    <link rel="stylesheet" href="template/css/style.css">
+</head>
+
+<body>
+    <div class="container p-5">
+        <div class="row">
+
+            <div class="col-8 offset-2" id="loginForm">
+                <form>
+                    <h1 class="text-white" style="margin: 0% 0% 5% 25%;">Iniciar sessió</h1>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label text-white">Correu electrònic:</label>
+                        <div class="col-8">
+                            <input type="email" class="form-control bg-transparent" id="loginEmail" value="admin@gmail.com">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="content" class="col-4 col-form-label text-white">Contrasenya:</label>
+                        <div class="col-8">
+                            <input type="password" class="form-control bg-transparent" id="loginPassword" value="123456">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-4 col-8">
+                            <button type="button" id="newUser" class="btn btn-default float-right">Registrar un nou usuari</button>
+                            <button type="button" id="login" class="btn btn-default float-right">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-8 offset-2" id="signupForm" style="display: none;">
+                <form>
+                    <h1 class="text-white" style="margin: 0% 0% 5% 15%;">Registrar Nou Usuari</h1>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label text-white">Correu electrònic:</label>
+                        <div class="col-8">
+                            <input type="email" class="form-control bg-transparent" id="signupEmail">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="content" class="col-4 col-form-label text-white">Contrasenya:</label>
+                        <div class="col-8">
+                            <input type="password" class="form-control bg-transparent" id="signupPassword">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="content" class="col-4 col-form-label text-white">Confirmar contrasenya:</label>
+                        <div class="col-8">
+                            <input type="password" class="form-control bg-transparent" id="signupPasswordConfirm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-4 col-8">
+                            <button type="button" id="signup" class="btn btn-default float-right">Enviar</button>
+                            <button type="button" id="Tornar" class="btn btn-default float-right">Tornar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-8 offset-2" id="itemsForm" style="display: none;">
+                <form>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label text-white">Títol:</label>
+                        <div class="col-8">
+                            <input type="text" class="form-control text-white bg-transparent" id="title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="content" class="col-4 col-form-label text-white">Contingut:</label>
+                        <div class="col-8">
+                            <input type="text" class="form-control bg-transparent" id="content">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="image" class="col-4 col-form-label text-white">Imatge:</label>
+                        <div class="col-6">
+                            <input type="file" class="form-control-file" id="image">
+                        </div>
+                        <div class="col-2">
+                            <img class="rounded" id="thumbnail" style="max-width: 60px; max-height: 60px; visibility: hidden;" alt="imatge">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-4 col-8">
+                            <button type="button" id="Archivos" class="btn btn-default float-right">Subir Archivos</button>
+                            <button type="button" id="save" class="btn btn-default float-right mr-3">Guardar</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="elementId">
+                </form>
+            </div>
+
+            <div class="col-2">
+                <div id="alert" role="alert"></div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover" id="listItems" style="display: none;">
+            </table>
+        </div>
+
+        <div class="col-8 offset-2" id="FitcherosForm" style="display: none;">
+            <form>
+                <div class="form-group row">
+                    <label for="tituloFichero" class="col-4 col-form-label text-white">Títol:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control text-white bg-transparent" id="tituloFitxero">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contenidoFichero" class="col-4 col-form-label text-white">Contingut:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control bg-transparent" id="contenidoFitxero">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fitcher" class="col-4 col-form-label text-white">Fitcher:</label>
+                    <div class="col-6">
+                        <input type="file" class="form-control-file" id="fitxer">
+                    </div>
+                    <div class="col-2">
+                        <img class="rounded" id="thumbFitxeros" style="max-width: 60px; max-height: 60px; visibility: hidden;" alt="imatge">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-4 col-8">
+                        <button type="button" id="images" class="btn btn-default float-right">Subir Images</button>
+                        <button type="button" id="saveFitxer" class="btn btn-default float-right">Guardar</button>
+                    </div>
+                </div>
+                <input type="hidden" id="elementId">
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover" id="#" style="display: none;">
+            </table>
+        </div>
+    </div>
+</body>
+<script language="javascript" src="template/js/config.js"></script>
+<script language="javascript" src="template/js/firestore.js"></script>
+<script language="javascript" src="template/js/storage.js"></script>
+<script language="javascript" src="template/js/items.js"></script>
+<script src="template/js/index.js"></script>
+
+
+</html>
