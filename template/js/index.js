@@ -1,5 +1,5 @@
 let imatgeModificada = false;
-
+let fitxerModificat = false;
 // Funcion para eliminar un elemento selecionado
 function eliminar(itemId, imageUrl) {
     deleteFile(imageUrl)
@@ -144,4 +144,47 @@ $("#images").click(function() {
     $("#FitcherosForm").attr("style", "display: none");
     $("#itemsForm").attr("style", "display: block");
     $("#listItems").attr("style", "display: block");
+});
+
+
+$("#fitxer").change(function() {
+    fitxerModificat = true;
+});
+
+$("#saveFitxer").click(function() {
+    let id = $("#elementId").val();
+    let title = $("#tituloFitxero").val();
+    let content = $("#contenidoFitxero").val();
+    let fitxer = $("#fitxer").get(0).files[0];;
+    let doc = {
+        content: content,
+        title: title
+    };
+    if (id == "") {
+        uploadFile(fitxer).then((fitxerUrl) => {
+            doc.fitxer = fitxerUrl;
+            addFichero(doc);
+        }).catch(() => {
+            showAlert("Error al intentar guardar el Fitxer", "alert-danger");
+        });
+    } else {
+        if (fitxerModificat) {
+            let currentFitxerUrl = $("#thumbFitxeros").src();
+            deleteFile(currentFitxerUrl).then(function() {
+                uploadFile(fitxer).then((fitxerUrl) => {
+                    doc.fitxer = fitxerUrl;
+                    updateFitxero(id, doc);
+                }).catch(() => {
+                    showAlert("Error al intentar actualitzat el Fitxer", "alert-danger");
+                });
+
+            }).catch(function() {
+                showAlert("Error al intentar actualitzar el Fitxer", "alert-danger");
+            });
+        } else {
+            updateFitxero(id, doc)
+        }
+    }
+
+    fitxerModificat = false;
 });
