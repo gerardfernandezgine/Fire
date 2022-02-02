@@ -150,10 +150,12 @@ $("#images").click(function() {
 });
 
 
+// Enviar per modificar el Fitxer
 $("#fitxer").change(function() {
     fitxerModificat = true;
 });
 
+// Enviar la informacio del Fitxers
 $("#saveFitxer").click(function() {
     let id = $("#elementId").val();
     let title = $("#tituloFitxero").val();
@@ -190,4 +192,26 @@ $("#saveFitxer").click(function() {
     }
 
     fitxerModificat = false;
+});
+
+// Anar a Recuperacio per Correu
+$("#recu").click(function() {
+    $("#loginForm").attr("style", "display: none");
+    $("#recuperarContraForm").attr("style", "display: block");
+});
+
+// Tornar a Iniciar Sesio
+$("#TornarRecu").click(function() {
+    $("#loginForm").attr("style", "display: block");
+    $("#recuperarContraForm").attr("style", "display: none");
+});
+
+// Enviar Correo de Recu la contra
+$("#enviarCorreo").click(function() {
+    let correo = $("#recuEmail").val();
+    auth.sendPasswordResetEmail(correo).then(function() {
+        showAlert("Correu enviat amb èxit", "alert-success");
+    }).catch(function() {
+        showAlert("Error al enviar el correu", "alert-danger");
+    });
 });
