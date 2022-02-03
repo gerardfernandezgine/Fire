@@ -40,20 +40,29 @@ function updateFitxero(id, doc) {
             showAlert("Fitxer actualitzat correctament", "alert-success");
         })
         .catch(() => {
-            showAlert("Error al intentar actualitzat el Fitxer", "alert-danger");
+            showAlert("Error al intentar actualitzat el Fitxer1", "alert-danger");
         });
 }
 
 // Funcion para cargar los items de la BBDD
-function loadFicheros() {
-    selectAll(fitcheros, "title")
+function loadFicheros(busqueda = "") {
 
-    //selectWhere(items, "title", "==", "ruben")
-    .then((arrayFitxeros) => {
+    let select = "";
+    if (busqueda == "") {
+        select = selectAll(fitcheros, "title");
+    } else
+    if (busqueda != "") {
+        select = selectWhere(fitcheros, "title", "==", busqueda);
+    };
+
+
+    select
+
+        .then((arrayFitxeros) => {
             $("#listFicheros").html("<tr>" +
-                "<th class = 'text-white'> Títol </th> " +
-                "<th class = 'text-white'> Contingut </th>" +
-                "<th></th>" +
+                "<th class='text-white'> Títol </th> " +
+                "<th class='text-white'> Contingut </th>" +
+                "<th><input type='search' name='busquedaFitxeros' id='busquedaFitxeros' placeholder='Busqueda... '></th>" +
                 "</tr>");
 
 
@@ -71,9 +80,8 @@ function loadFicheros() {
                     "</button>" +
                     "</td>" +
                     "</tr>");
-                console.log(doc.data().title)
             })
-
+            showAlert("Acabat", "alert-danger");
         })
         .catch(() => {
             showAlert("Error al mostrar els fitxers", "alert-danger");

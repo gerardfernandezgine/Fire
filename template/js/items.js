@@ -53,13 +53,13 @@ function loadItems() {
         .then((arrayItems) => {
             console.log(arrayItems)
             document.getElementById("listItems").innerHTML = `<tr>
-																<th></th>
-																<th>Títol</th>
-																<th>Contingut</th>
-																<th></th>
+																<th class="text-white">Fotos</th>
+																<th class="text-white">Títol</th>
+																<th class="text-white">Contingut</th>
+                                                                <th><input type="search" name="busquedaItems" id="busquedaItems" placeholder="Busqueda..."></th>
 															</tr>`;
             arrayItems.forEach((doc) => {
-                console.log(1111111111);
+                console.log(doc);
                 let image = "";
                 if (doc.data().image != null) {
                     image = `<img src="${doc.data().image}" class="rounded" style="max-width: 100px; max-height: 100px;" "alt="${doc.data().title}">`;

@@ -180,15 +180,16 @@ $("#saveFitxer").click(function() {
                     doc.fitxer = fitxerUrl;
                     updateFitxero(id, doc);
                 }).catch(() => {
-                    showAlert("Error al intentar actualitzat el Fitxer", "alert-danger");
+                    showAlert("Error al intentar actualitzar el Fitxer2", "alert-danger");
                 });
 
             }).catch(function() {
-                showAlert("Error al intentar actualitzar el Fitxer", "alert-danger");
+                showAlert("Error al intentar actualitzar el Fitxer3", "alert-danger");
             });
         } else {
             updateFitxero(id, doc)
         }
+
     }
 
     fitxerModificat = false;
@@ -206,7 +207,7 @@ $("#TornarRecu").click(function() {
     $("#recuperarContraForm").attr("style", "display: none");
 });
 
-// Enviar Correo de Recu la contra
+// Enviar Correo de Recuperacio de la contrasenya
 $("#enviarCorreo").click(function() {
     let correo = $("#recuEmail").val();
     auth.sendPasswordResetEmail(correo).then(function() {
@@ -214,4 +215,11 @@ $("#enviarCorreo").click(function() {
     }).catch(function() {
         showAlert("Error al enviar el correu", "alert-danger");
     });
+});
+
+// Buscador de la tabla Items
+$("#searchFitxer").click(function() {
+    let busqueda = $("#busquedaFitxeros").val();
+    loadFicheros(busqueda);
+
 });

@@ -73,7 +73,8 @@ input[type='file'] {
 #newUser,
 #save,
 #signup,
-#enviarCorreo {
+#enviarCorreo,
+#searchFitxer {
     border: 1px solid white;
 }
 
