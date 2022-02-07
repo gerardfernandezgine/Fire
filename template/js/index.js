@@ -221,5 +221,4 @@ $("#enviarCorreo").click(function() {
 $("#searchFitxer").click(function() {
     let busqueda = $("#busquedaFitxeros").val();
     loadFicheros(busqueda);
-
 });
