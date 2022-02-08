@@ -23,6 +23,17 @@ function deleteItem(id) {
     deleteById(items, id)
         .then(() => {
             loadItems();
+            console.log("b");
+            showAlert("Element eliminat correctament", "alert-success");
+        }).catch(() => {
+            showAlert("Error al intentar eliminar l'element", "alert-danger");
+        });
+}
+
+function deleteFitxeros(id) {
+    deleteById(fitcheros, id)
+        .then(() => {
+            loadItems();
             showAlert("Element eliminat correctament", "alert-success");
         }).catch(() => {
             showAlert("Error al intentar eliminar l'element", "alert-danger");
@@ -38,6 +49,20 @@ function editItem(id) {
             document.getElementById("title").value = doc.data().title;
             document.getElementById("content").value = doc.data().content;
             document.getElementById("thumbnail").src = doc.data().image;
+        })
+        .catch(() => {
+            showAlert("Error al intentar editar l'element", "alert-danger");
+        });
+}
+// Funcion para editar un item de la base de datos
+function editFitxer(id) {
+    document.getElementById("elementId").value = id;
+    document.getElementById("thumbnail").style.visibility = "visible";
+    selectById(fitcheros, id)
+        .then((doc) => {
+            document.getElementById("tituloFitxero").value = doc.data().title;
+            document.getElementById("contenidoFitxero").value = doc.data().content;
+            // document.getElementById("fitxer").src = doc.data().fitxer;
         })
         .catch(() => {
             showAlert("Error al intentar editar l'element", "alert-danger");

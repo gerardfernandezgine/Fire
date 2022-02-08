@@ -15,29 +15,6 @@ function addFichero(doc) {
         });
 }
 
-// Funcion para eliminar un item de la BBDD
-function deleteFitxer(id) {
-    deleteById(fitcheros, id)
-        .then(() => {
-            loadFicheros();
-            showAlert("Fitxer eliminat correctament", "alert-success");
-        }).catch(() => {
-            showAlert("Error al intentar eliminar el Fitxer", "alert-danger");
-        });
-}
-
-// Funcion para editar un item de la base de datos
-function editFichero(id) {
-    $("#elementIdFitxer").val() = id;
-    selectById(items, id)
-        .then((doc) => {
-            $("#tituloFitxero").val() = doc.data().title;
-            $("#contenidoFitxero").val() = doc.data().content;
-        })
-        .catch(() => {
-            showAlert("Error al intentar editar l'element", "alert-danger");
-        });
-}
 
 // Funcion para adaptar el item
 function updateFitxero(id, doc) {
@@ -87,12 +64,12 @@ function loadFicheros(busqueda = "") {
                     "<td>" + doc.data().title + "</td>" +
                     "<td>" + doc.data().content + "</td>" +
                     "<td>" +
-                    "<button type='button' class='btn btn-danger float-right' onclick='deleteFitxer(" + doc.id + ")'>" +
+                    "<button type='button' class='btn btn-danger float-right' onclick=\"deleteFitxer('" + doc.id + "','" + doc.data().fitxer + "')\">" +
                     "Eliminar" +
                     "</button>" +
                     "</td>" +
                     "<td>" +
-                    "<button type='button' class='btn btn-primary mr-2 float-right' onclick='editFichero(" + doc.id + "," + doc.data().fitxer + ")'>" +
+                    "<button type='button' class='btn btn-primary mr-2 float-right' onclick=\"editFitxer('" + doc.id + "')\">" +
                     "Editar" +
                     "</button>" +
                     "</td>" +

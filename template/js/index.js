@@ -11,6 +11,16 @@ function eliminar(itemId, imageUrl) {
         });
 }
 
+function deleteFitxer(id, fitxerUrl) {
+    deleteFile(fitxerUrl)
+        .then(() => {
+            deleteFitxeros(id);
+            loadFicheros();
+        }).catch(() => {
+            showAlert("Error al intentar eliminar la imatge", "alert-danger");
+        });
+
+}
 // Funcion para enseñar el alert
 function showAlert(text = "", type) {
     document.getElementById("alert").innerText = text;

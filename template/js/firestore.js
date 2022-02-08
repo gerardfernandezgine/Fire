@@ -33,7 +33,7 @@ function selectAll(collection, field = null) {
 
     return new Promise((resolve, reject) => {
         if (field != null) {
-            collection.orderBy(field).get()
+            collection.orderBy(field).limit(10).get()
                 .then((querySnapshot) => {
                     let docs = [];
                     querySnapshot.forEach((doc) => {
