@@ -31,7 +31,6 @@ function deleteById(collection, id) {
 // Funcion para selecionar todos los atributos guardados en la BBDD
 function selectAll(collection, field = null) {
 
-
     return new Promise((resolve, reject) => {
         if (field != null) {
             collection.orderBy(field).get()
@@ -76,7 +75,7 @@ function selectById(collection, id) {
 
 function selectWhere(collection, field, operator, value) {
     return new Promise((resolve, reject) => {
-        collection.where(field, operator, value).orderBy(field).get()
+        collection.where(field, operator, value).get()
             .then((querySnapshot) => {
                 let docs = [];
                 querySnapshot.forEach((doc) => {
