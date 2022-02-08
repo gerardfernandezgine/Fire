@@ -27,7 +27,7 @@ function deleteById(collection, id) {
     });
 }
 
-
+// collection.orderBy(orderByField).startAfter('Ccccccccccccccc').limit(3).get()
 // Funcion para selecionar todos los atributos guardados en la BBDD
 function selectAll(collection, field = null) {
 
