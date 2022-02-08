@@ -23,17 +23,6 @@ function deleteItem(id) {
     deleteById(items, id)
         .then(() => {
             loadItems();
-            console.log("b");
-            showAlert("Element eliminat correctament", "alert-success");
-        }).catch(() => {
-            showAlert("Error al intentar eliminar l'element", "alert-danger");
-        });
-}
-
-function deleteFitxeros(id) {
-    deleteById(fitcheros, id)
-        .then(() => {
-            loadItems();
             showAlert("Element eliminat correctament", "alert-success");
         }).catch(() => {
             showAlert("Error al intentar eliminar l'element", "alert-danger");
@@ -54,20 +43,6 @@ function editItem(id) {
             showAlert("Error al intentar editar l'element", "alert-danger");
         });
 }
-// Funcion para editar un item de la base de datos
-function editFitxer(id) {
-    document.getElementById("elementId").value = id;
-    document.getElementById("thumbnail").style.visibility = "visible";
-    selectById(fitcheros, id)
-        .then((doc) => {
-            document.getElementById("tituloFitxero").value = doc.data().title;
-            document.getElementById("contenidoFitxero").value = doc.data().content;
-            // document.getElementById("fitxer").src = doc.data().fitxer;
-        })
-        .catch(() => {
-            showAlert("Error al intentar editar l'element", "alert-danger");
-        });
-}
 
 // Funcion para cargar los items de la BBDD
 function loadItems() {
@@ -80,13 +55,15 @@ function loadItems() {
 																<th class="text-white">Contingut</th>
                                                                 <th></th>
 															</tr>`;
+
+            console.log(arrayItems)
             arrayItems.forEach((doc) => {
                 console.log(doc);
                 let image = "";
                 if (doc.data().image != null) {
                     image = `<img src="${doc.data().image}" class="rounded" style="max-width: 100px; max-height: 100px;" "alt="${doc.data().title}">`;
                 }
-                document.getElementById("listItems").innerHTML += `<tr>
+                document.getElementById("tbodyItems").innerHTML += `<tr>
                                                                     <td>${image}</td>
                                                                     <td>${doc.data().title}</td>
                                                                     <td>${doc.data().content}</td>
