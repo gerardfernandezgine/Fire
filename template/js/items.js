@@ -55,13 +55,15 @@ function loadItems() {
 																<th class="text-white">Contingut</th>
                                                                 <th></th>
 															</tr>`;
+
+            console.log(arrayItems)
             arrayItems.forEach((doc) => {
                 console.log(doc);
                 let image = "";
                 if (doc.data().image != null) {
                     image = `<img src="${doc.data().image}" class="rounded" style="max-width: 100px; max-height: 100px;" "alt="${doc.data().title}">`;
                 }
-                document.getElementById("listItems").innerHTML += `<tr>
+                document.getElementById("tbodyItems").innerHTML += `<tr>
                                                                     <td>${image}</td>
                                                                     <td>${doc.data().title}</td>
                                                                     <td>${doc.data().content}</td>
