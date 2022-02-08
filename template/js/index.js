@@ -1,5 +1,6 @@
 let imatgeModificada = false;
 let fitxerModificat = false;
+
 // Funcion para eliminar un elemento selecionado
 function eliminar(itemId, imageUrl) {
     deleteFile(imageUrl)
@@ -217,8 +218,8 @@ $("#enviarCorreo").click(function() {
     });
 });
 
-// Buscador de la tabla Items
-$("#searchFitxer").click(function() {
+
+function searchFitxer() {
     let busqueda = $("#busquedaFitxeros").val();
     loadFicheros(busqueda);
-});
+}

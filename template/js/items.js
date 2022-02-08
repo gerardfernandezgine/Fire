@@ -7,7 +7,6 @@ function addItem(doc) {
     add(items, doc)
         .then(() => {
             loadItems();
-            loadFicheros();
             document.getElementById("title").value = "";
             document.getElementById("content").value = "";
             document.getElementById("image").value = "";
@@ -24,7 +23,6 @@ function deleteItem(id) {
     deleteById(items, id)
         .then(() => {
             loadItems();
-            loadFicheros();
             showAlert("Element eliminat correctament", "alert-success");
         }).catch(() => {
             showAlert("Error al intentar eliminar l'element", "alert-danger");
@@ -51,6 +49,13 @@ function loadItems() {
     selectAll(items, "title")
         //selectWhere(items, "title", "==", "ruben")
         .then((arrayItems) => {
+            document.getElementById("listItems").innerHTML = `<tr>
+																<th class="text-white">Fotos</th>
+																<th class="text-white">Títol</th>
+																<th class="text-white">Contingut</th>
+                                                                <th></th>
+															</tr>`;
+
             console.log(arrayItems)
             arrayItems.forEach((doc) => {
                 console.log(doc);
