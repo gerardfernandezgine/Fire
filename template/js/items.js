@@ -19,7 +19,7 @@ function addItem(doc) {
         });
 }
 
-// Funcion para eliminar un item de la BBDD
+// Funcion para eliminar un fitxer de la BBDD
 function deleteItem(id) {
     deleteById(items, id)
         .then(() => {
@@ -31,6 +31,7 @@ function deleteItem(id) {
         });
 }
 
+// Funcion per eliminar un fitxer de la BBDD
 function deleteFitxeros(id) {
     deleteById(fitcheros, id)
         .then(() => {
@@ -116,6 +117,7 @@ function loadItems(busqueda = "", limite = 5, usuari = false) {
                                                                 <th class="text-white">Comentari</th>
                                                                 <th></th>
                                                                 <th></th>
+
                                                                 <th>
                                                                     <input type='search' name='busquedaItems' id='busquedaItems' placeholder='Busqueda... '>
                                                                     <button type='button' onclick='searchItems()' class='btn btn-default'>Buscar</button></th>

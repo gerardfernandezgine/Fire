@@ -1,5 +1,6 @@
 const fitcheros = db.collection("fitcheros");
 var usuari2 = false;
+
 // Funcion para añadir un fitchero
 function addFichero(doc) {
     add(fitcheros, doc)
@@ -16,7 +17,7 @@ function addFichero(doc) {
 }
 
 
-// Funcion para adaptar el item
+// Funcion para adaptar el Fitxero
 function updateFitxero(id, doc) {
     updateById(fitcheros, id, doc)
         .then(() => {
@@ -35,7 +36,7 @@ function updateFitxero(id, doc) {
         });
 }
 
-// Funcion para cargar los items de la BBDD
+// Funcion para cargar los ficheros de la BBDD
 function loadFicheros(busqueda = "", limite = 5, usuari = false) {
     usuari2 = usuari;
     if (usuari2) {
