@@ -1,12 +1,12 @@
 const items = db.collection("items");
 //const categories = db.collection("categories");
-
+var usuari2 = false;
 
 // Funcion para añadir un item a la BBDD
 function addItem(doc) {
     add(items, doc)
         .then(() => {
-            loadItems();
+            loadItems("", 5, usuari2);
             document.getElementById("title").value = "";
             document.getElementById("content").value = "";
             document.getElementById("image").value = "";
@@ -22,7 +22,7 @@ function addItem(doc) {
 function deleteItem(id) {
     deleteById(items, id)
         .then(() => {
-            loadItems();
+            loadItems("", 5, usuari2);
             console.log("b");
             showAlert("Element eliminat correctament", "alert-success");
         }).catch(() => {
@@ -33,7 +33,7 @@ function deleteItem(id) {
 function deleteFitxeros(id) {
     deleteById(fitcheros, id)
         .then(() => {
-            loadItems();
+            loadItems("", 5, usuari2);
             showAlert("Element eliminat correctament", "alert-success");
         }).catch(() => {
             showAlert("Error al intentar eliminar l'element", "alert-danger");
@@ -71,6 +71,7 @@ function editFitxer(id) {
 
 // Funcion para cargar los items de la BBDD
 function loadItems(busqueda = "", limite = 5, usuari = false) {
+    usuari2 = usuari;
     let select = "";
     if (busqueda == "") {
         select = selectAll(items, "title", limite);
@@ -143,7 +144,7 @@ function loadItems(busqueda = "", limite = 5, usuari = false) {
 function updateItem(id, doc) {
     updateById(items, id, doc)
         .then(() => {
-            loadItems();
+            loadItems("", 5, usuari2);
             document.getElementById("elementId").value = "";
             document.getElementById("title").value = "";
             document.getElementById("content").value = "";

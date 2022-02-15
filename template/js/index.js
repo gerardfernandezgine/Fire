@@ -63,9 +63,6 @@ $("#login2").click(function() {
     $("#listItems").css("display", "table");
     loadItems("", 5, usuari);
     loadFicheros("", 5, usuari);
-
-
-
 });
 
 // Funcion para hacer aparecer el formulario de Sing UP

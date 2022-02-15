@@ -1,10 +1,10 @@
 const fitcheros = db.collection("fitcheros");
-
+var usuari2 = false;
 // Funcion para añadir un fitchero
 function addFichero(doc) {
     add(fitcheros, doc)
         .then(() => {
-            loadFicheros();
+            loadFicheros("", 5, usuari2);
             $("#tituloFitxero").val() = "";
             $("#contenidoFitxero").val() = "";
             $("#fitxer").val() = "";
@@ -20,7 +20,7 @@ function addFichero(doc) {
 function updateFitxero(id, doc) {
     updateById(fitcheros, id, doc)
         .then(() => {
-            loadFicheros();
+            loadFicheros("", 5, usuari2);
 
             $("#elementIdFitxer").val() = "";
             $("tituloFitxero").val() = "";
@@ -37,6 +37,7 @@ function updateFitxero(id, doc) {
 
 // Funcion para cargar los items de la BBDD
 function loadFicheros(busqueda = "", limite = 5, usuari = false) {
+    usuari2 = usuari;
     let select = "";
     if (busqueda == "") {
         $('#tbodyFicheros').empty();
