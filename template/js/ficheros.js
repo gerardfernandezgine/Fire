@@ -52,9 +52,8 @@ function loadFicheros(busqueda = "") {
             $("#theadFitcheros").html("<tr>" +
                 "<th class='text-white'> Títol </th>" +
                 "<th class='text-white'> Contingut </th>" +
-                "<th><input type='search' name='busquedaFitxeros' id='busquedaFitxeros' placeholder='Busqueda... '></th>" +
-                "<th><button type='button' onclick='searchFitxer()' class='btn btn-default float-right'>Buscar</button></th>",
-                "<th></th>",
+                "<th><input type='search' name='busquedaFitxeros' id='busquedaFitxeros' placeholder='Busqueda... '>" +
+                "<button type='button' onclick='searchFitxer()' class='btn btn-default'>Buscar</button></th>" +
                 "</tr>");
 
 
@@ -67,8 +66,6 @@ function loadFicheros(busqueda = "") {
                     "<button type='button' class='btn btn-danger float-right' onclick=\"deleteFitxer('" + doc.id + "','" + doc.data().fitxer + "')\">" +
                     "Eliminar" +
                     "</button>" +
-                    "</td>" +
-                    "<td>" +
                     "<button type='button' class='btn btn-primary mr-2 float-right' onclick=\"editFitxer('" + doc.id + "')\">" +
                     "Editar" +
                     "</button>" +
