@@ -11,7 +11,7 @@ function addFichero(doc) {
 
             showAlert("Fitxer guardat correctament", "alert-success");
         }).catch(() => {
-            showAlert("Error al guardar el fitcher1", "alert-danger");
+            showAlert("Error al guardar el fitxer", "alert-danger");
         });
 }
 
@@ -31,7 +31,7 @@ function updateFitxero(id, doc) {
             showAlert("Fitxer actualitzat correctament", "alert-success");
         })
         .catch(() => {
-            showAlert("Error al intentar actualitzat el Fitxer1", "alert-danger");
+            showAlert("Error al intentar actualitzat el fitxer", "alert-danger");
         });
 }
 
@@ -46,7 +46,6 @@ function loadFicheros(busqueda = "") {
         $('#tbodyFicheros').empty();
         select = selectWhere(fitcheros, "title", "==", busqueda);
     };
-    console.log(select);
     select
         .then((arrayFitxeros) => {
             $("#theadFitcheros").html("<tr>" +
