@@ -1,7 +1,7 @@
 let imatgeModificada = false;
 let fitxerModificat = false;
 var limite = 5;
-
+var usuari = false;
 // Funcion para eliminar un elemento selecionado
 function eliminar(itemId, imageUrl) {
     deleteFile(imageUrl)
@@ -33,8 +33,8 @@ function showAlert(text = "", type) {
 }
 
 window.addEventListener("load", function() {
-    loadItems();
-    loadFicheros();
+    loadItems("", 5, usuari);
+    loadFicheros("", 5, usuari);
 });
 
 // Funciom para iniciar Session
@@ -53,6 +53,19 @@ document.getElementById("login").addEventListener("click", function() {
         .catch(function(error) {
             showAlert("Error d’autenticació", "alert-danger");
         });
+});
+
+// Funciom para iniciar Session
+$("#login2").click(function() {
+    usuari = true;
+    $("#loginForm").css("display", "none");
+    $("#itemsForm").css("display", "block");
+    $("#listItems").css("display", "table");
+    loadItems("", 5, usuari);
+    loadFicheros("", 5, usuari);
+
+
+
 });
 
 // Funcion para hacer aparecer el formulario de Sing UP
@@ -242,10 +255,10 @@ function searchItems() {
 
 function sumapagines() {
     limite += 5;
-    loadItems("", limite);
+    loadItems("", limite, usuari);
 }
 
 function sumapagines2() {
     limite += 5;
-    loadFicheros("", limite);
+    loadFicheros("", limite, usuari);
 }

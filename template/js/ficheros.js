@@ -36,7 +36,7 @@ function updateFitxero(id, doc) {
 }
 
 // Funcion para cargar los items de la BBDD
-function loadFicheros(busqueda = "", limite = 5) {
+function loadFicheros(busqueda = "", limite = 5, usuari = false) {
     let select = "";
     if (busqueda == "") {
         $('#tbodyFicheros').empty();
@@ -48,31 +48,45 @@ function loadFicheros(busqueda = "", limite = 5) {
     };
     select
         .then((arrayFitxeros) => {
-            $("#theadFitcheros").html("<tr>" +
-                "<th class='text-white'> Títol </th>" +
-                "<th class='text-white'> Contingut </th>" +
-                "<th><input type='search' name='busquedaFitxeros' id='busquedaFitxeros' placeholder='Busqueda... '>" +
-                "<button type='button' onclick='searchFitxer()' class='btn btn-default'>Buscar</button></th>" +
-                "<th><button type='button' onclick='sumapagines2()' class='btn btn-default' Style='margin-left:300px;'>Ver mas</button></th>" +
-                "</tr>");
-
+            if (usuari) {
+                $("#theadFitcheros").html("<tr>" +
+                    "<th class='text-white'> Títol </th>" +
+                    "<th class='text-white'> Contingut </th>" +
+                    "</tr>");
+            } else {
+                $("#theadFitcheros").html("<tr>" +
+                    "<th class='text-white'> Títol </th>" +
+                    "<th class='text-white'> Contingut </th>" +
+                    "<th><input type='search' name='busquedaFitxeros' id='busquedaFitxeros' placeholder='Busqueda... '>" +
+                    "</tr>");
+            }
 
             arrayFitxeros.forEach((doc) => {
-                $("#tbodyFicheros").append(
-                    "<tr>" +
-                    "<td>" + doc.data().title + "</td>" +
-                    "<td>" + doc.data().content + "</td>" +
-                    "<td>" +
-                    "<td>" +
-                    "<button type='button' class='btn btn-danger float-right' onclick=\"deleteFitxer('" + doc.id + "','" + doc.data().fitxer + "')\">" +
-                    "Eliminar" +
-                    "</button>" +
-                    "<button type='button' class='btn btn-primary mr-2 float-right' onclick=\"editFitxer('" + doc.id + "')\">" +
-                    "Editar" +
-                    "</button>" +
-                    "</td>" +
-                    "</tr>");
+                if (usuari) {
+                    $("#tbodyFicheros").append(
+                        "<tr>" +
+                        "<td>" + doc.data().title + "</td>" +
+                        "<td>" + doc.data().content + "</td>" +
+                        "<td>" +
+                        "</tr>");
+                } else {
+                    $("#tbodyFicheros").append(
+                        "<tr>" +
+                        "<td>" + doc.data().title + "</td>" +
+                        "<td>" + doc.data().content + "</td>" +
+                        "<td>" +
+                        "<td>" +
+                        "<button type='button' class='btn btn-danger float-right eliminarFitchero' onclick=\"deleteFitxer('" + doc.id + "','" + doc.data().fitxer + "')\">" +
+                        "Eliminar" +
+                        "</button>" +
+                        "<button type='button' class='btn btn-primary mr-2 float-right' onclick=\"editFitxer('" + doc.id + "')\">" +
+                        "Editar" +
+                        "</button>" +
+                        "</td>" +
+                        "</tr>");
+                }
             })
+
         })
         .catch(() => {
             showAlert("Error al mostrar els fitxers", "alert-danger");

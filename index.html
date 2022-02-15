@@ -38,6 +38,7 @@
                             <button type="button" id="recu" class="btn btn-default ">Recuperar Contrasenya</button>
                             <button type="button" id="newUser" class="btn btn-default float-right">Registrar un nou usuari</button>
                             <button type="button" id="login" class="btn btn-default mt-2">Entrar</button>
+                            <button type="button" id="login2" class="btn btn-default mt-2">Entrar sense registrar</button>
                         </div>
                     </div>
                 </form>
@@ -169,6 +170,13 @@
             <table class="table table-hover" id="listFicheros" style="display: none; width: 100%;">
                 <thead id="theadFitcheros"></thead>
                 <tbody id="tbodyFicheros"></tbody>
+                <tfoot id="tfootFicheros">
+                    <tr>
+                        <th>
+                            <button type='button' onclick='sumapagines2()' class='btn btn-default'>Ver mas</button>
+                        </th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 

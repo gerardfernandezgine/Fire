@@ -70,7 +70,7 @@ function editFitxer(id) {
 }
 
 // Funcion para cargar los items de la BBDD
-function loadItems(busqueda = "", limite = 5) {
+function loadItems(busqueda = "", limite = 5, usuari = false) {
     let select = "";
     if (busqueda == "") {
         select = selectAll(items, "title", limite);
@@ -80,7 +80,14 @@ function loadItems(busqueda = "", limite = 5) {
 
     select
         .then((arrayItems) => {
-            document.getElementById("listItems").innerHTML = `<tr>
+            if (usuari) {
+                document.getElementById("listItems").innerHTML = `<tr>
+																<th class="text-white">Fotos</th>
+																<th class="text-white">Títol</th>
+																<th class="text-white">Contingut</th>
+															</tr>`;
+            } else {
+                document.getElementById("listItems").innerHTML = `<tr>
 																<th class="text-white">Fotos</th>
 																<th class="text-white">Títol</th>
 																<th class="text-white">Contingut</th>
@@ -88,31 +95,43 @@ function loadItems(busqueda = "", limite = 5) {
                                                                     <input type='search' name='busquedaItems' id='busquedaItems' placeholder='Busqueda... '>
                                                                     <button type='button' onclick='searchItems()' class='btn btn-default'>Buscar</button></th>
                                                                 </th>
-                                                                <th>
-                                                                    <button type='button' onclick='sumapagines()' class='btn btn-default'Style='margin-left:100px;'>Ver mas</button>
-                                                                </th>
 															</tr>`;
+            }
             arrayItems.forEach((doc) => {
                 console.log(doc);
                 let image = "";
                 if (doc.data().image != null) {
                     image = `<img src="${doc.data().image}" class="rounded" style="max-width: 100px; max-height: 100px;" "alt="${doc.data().title}">`;
                 }
-                document.getElementById("listItems").innerHTML += `<tr>
+                if (usuari) {
+                    document.getElementById("listItems").innerHTML += `<tr>
+                    <td>${image}</td>
+                    <td>${doc.data().title}</td>
+                    <td>${doc.data().content}</td>
+                    <td></td>
+                   
+                </tr>`;
+                } else {
+                    document.getElementById("listItems").innerHTML += `<tr>
                                                                     <td>${image}</td>
                                                                     <td>${doc.data().title}</td>
                                                                     <td>${doc.data().content}</td>
                                                                     <td></td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-danger float-right" onclick="eliminar('${doc.id}', '${doc.data().image}')">
+                                                                        <button type="button" class="btn btn-danger eliminarItem float-right" onclick="eliminar('${doc.id}', '${doc.data().image}')">
                                                                             Eliminar
                                                                         </button>
-                                                                        <button type="button" class="btn btn-primary mr-2 float-right" onclick="editItem('${doc.id}')">
+                                                                        <button type="button" class="btn btn-primary mr-2 adaptarItem float-right" onclick="editItem('${doc.id}')">
                                                                             Editar
                                                                         </button>
                                                                     </td>
                                                                 </tr>`;
+                }
             })
+            document.getElementById("listItems").innerHTML += `<tr>
+            <button type='button' onclick='sumapagines()' class='btn btn-default'>Ver mas</button>
+            </td>
+        </tr>`;
         })
         .catch(() => {
             showAlert("Error al mostrar els elements", "alert-danger");
