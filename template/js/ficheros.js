@@ -36,15 +36,15 @@ function updateFitxero(id, doc) {
 }
 
 // Funcion para cargar los items de la BBDD
-function loadFicheros(busqueda = "") {
+function loadFicheros(busqueda = "", limite = 5) {
     let select = "";
     if (busqueda == "") {
         $('#tbodyFicheros').empty();
-        select = selectAll(fitcheros, "title");
+        select = selectAll(fitcheros, "title", limite);
     } else
     if (busqueda != "") {
         $('#tbodyFicheros').empty();
-        select = selectWhere(fitcheros, "title", "==", busqueda);
+        select = selectLike(fitcheros, "title", busqueda);
     };
     select
         .then((arrayFitxeros) => {
@@ -53,6 +53,7 @@ function loadFicheros(busqueda = "") {
                 "<th class='text-white'> Contingut </th>" +
                 "<th><input type='search' name='busquedaFitxeros' id='busquedaFitxeros' placeholder='Busqueda... '>" +
                 "<button type='button' onclick='searchFitxer()' class='btn btn-default'>Buscar</button></th>" +
+                "<th><button type='button' onclick='sumapagines2()' class='btn btn-default' Style='margin-left:300px;'>Ver mas</button></th>" +
                 "</tr>");
 
 
@@ -61,6 +62,7 @@ function loadFicheros(busqueda = "") {
                     "<tr>" +
                     "<td>" + doc.data().title + "</td>" +
                     "<td>" + doc.data().content + "</td>" +
+                    "<td>" +
                     "<td>" +
                     "<button type='button' class='btn btn-danger float-right' onclick=\"deleteFitxer('" + doc.id + "','" + doc.data().fitxer + "')\">" +
                     "Eliminar" +

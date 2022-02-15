@@ -70,12 +70,12 @@ function editFitxer(id) {
 }
 
 // Funcion para cargar los items de la BBDD
-function loadItems(busqueda = "") {
+function loadItems(busqueda = "", limite = 5) {
     let select = "";
     if (busqueda == "") {
-        select = selectAll(items, "title");
+        select = selectAll(items, "title", limite);
     } else if (busqueda != "") {
-        select = selectWhere(items, "title", "==", busqueda);
+        select = selectLike(items, "title", busqueda);
     }
 
     select
@@ -88,6 +88,9 @@ function loadItems(busqueda = "") {
                                                                     <input type='search' name='busquedaItems' id='busquedaItems' placeholder='Busqueda... '>
                                                                     <button type='button' onclick='searchItems()' class='btn btn-default'>Buscar</button></th>
                                                                 </th>
+                                                                <th>
+                                                                    <button type='button' onclick='sumapagines()' class='btn btn-default'Style='margin-left:100px;'>Ver mas</button>
+                                                                </th>
 															</tr>`;
             arrayItems.forEach((doc) => {
                 console.log(doc);
@@ -99,6 +102,7 @@ function loadItems(busqueda = "") {
                                                                     <td>${image}</td>
                                                                     <td>${doc.data().title}</td>
                                                                     <td>${doc.data().content}</td>
+                                                                    <td></td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-danger float-right" onclick="eliminar('${doc.id}', '${doc.data().image}')">
                                                                             Eliminar

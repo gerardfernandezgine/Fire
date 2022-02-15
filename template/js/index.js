@@ -1,5 +1,6 @@
 let imatgeModificada = false;
 let fitxerModificat = false;
+var limite = 5;
 
 // Funcion para eliminar un elemento selecionado
 function eliminar(itemId, imageUrl) {
@@ -237,4 +238,14 @@ function searchFitxer() {
 function searchItems() {
     let busqueda = $("#busquedaItems").val();
     loadItems(busqueda);
+}
+
+function sumapagines() {
+    limite += 5;
+    loadItems("", limite);
+}
+
+function sumapagines2() {
+    limite += 5;
+    loadFicheros("", limite);
 }

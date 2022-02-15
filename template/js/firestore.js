@@ -29,11 +29,10 @@ function deleteById(collection, id) {
 
 // collection.orderBy(orderByField).startAfter('Ccccccccccccccc').limit(3).get()
 // Funcion para selecionar todos los atributos guardados en la BBDD
-function selectAll(collection, field = null) {
-
+function selectAll(collection, field = null, limite) {
     return new Promise((resolve, reject) => {
         if (field != null) {
-            collection.orderBy(field).limit(10).get()
+            collection.orderBy(field).limit(limite).get()
                 .then((querySnapshot) => {
                     let docs = [];
                     querySnapshot.forEach((doc) => {
@@ -72,6 +71,27 @@ function selectById(collection, id) {
             });
     });
 }
+
+//LIKE (Per el busca)
+
+function selectLike(collection, field, value) {
+    return new Promise((resolve, reject) => {
+        collection.orderBy(field).startAt(value).endAt(value + "\uf8ff").get()
+            .then((querySnapshot) => {
+                let docs = [];
+                querySnapshot.forEach((doc) => {
+                    docs.push(doc);
+                });
+                resolve(docs);
+            })
+            .catch(() => {
+                reject();
+            });
+    });
+}
+
+
+//WHERE
 
 function selectWhere(collection, field, operator, value) {
     return new Promise((resolve, reject) => {
