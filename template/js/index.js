@@ -58,6 +58,19 @@ document.getElementById("login").addEventListener("click", function() {
 // Funciom para iniciar Session
 $("#login2").click(function() {
     usuari = true;
+    $("#formusuari10").css("display", "none");
+    $("#formusuari11").css("display", "none");
+    $("#formusuari1").css("display", "none");
+    $("#formusuari2").css("display", "none");
+    $("#formusuari3").css("display", "none");
+    $("#formusuari4").css("display", "none");
+    $("#formusuari9").css("display", "none");
+    $("#formusuari5").css("display", "none");
+    $("#formusuari6").css("display", "none");
+    $("#formusuari7").css("display", "none");
+    $("#formusuari8").css("display", "none");
+    $("#save").css("display", "none");
+    $("#saveFitxer").css("display", "none");
     $("#loginForm").css("display", "none");
     $("#itemsForm").css("display", "block");
     $("#listItems").css("display", "table");
@@ -159,6 +172,7 @@ document.getElementById("image").addEventListener("change", function() {
 $("#Archivos").click(function() {
     $("#FitcherosForm").show();
     $("#listFicheros").show();
+
     $("#listItems").hide();
     $("#itemsForm").hide();
 });

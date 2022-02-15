@@ -1,4 +1,5 @@
 const items = db.collection("items");
+const estados = db.collection("estados");
 //const categories = db.collection("categories");
 var usuari2 = false;
 
@@ -72,6 +73,22 @@ function editFitxer(id) {
 // Funcion para cargar los items de la BBDD
 function loadItems(busqueda = "", limite = 5, usuari = false) {
     usuari2 = usuari;
+    if (usuari2) {
+        $("#formusuari1").css("display", "none");
+        $("#formusuari2").css("display", "none");
+        $("#formusuari3").css("display", "none");
+        $("#formusuari4").css("display", "none");
+        $("#formusuari9").css("display", "none");
+        $("#formusuari10").css("display", "none");
+        $("#formusuari11").css("display", "none");
+        $("#formusuari5").css("display", "none");
+        $("#formusuari6").css("display", "none");
+        $("#formusuari7").css("display", "none");
+        $("#formusuari8").css("display", "none");
+        $("#save").css("display", "none");
+        $("#saveFitxer").css("display", "none");
+    }
+
     let select = "";
     if (busqueda == "") {
         select = selectAll(items, "title", limite);
@@ -82,16 +99,23 @@ function loadItems(busqueda = "", limite = 5, usuari = false) {
     select
         .then((arrayItems) => {
             if (usuari) {
+
                 document.getElementById("listItems").innerHTML = `<tr>
 																<th class="text-white">Fotos</th>
 																<th class="text-white">Títol</th>
 																<th class="text-white">Contingut</th>
+                                                                <th class="text-white">Comentari</th>
+                                                                <th></th>
+                                                                <th></th>
 															</tr>`;
             } else {
                 document.getElementById("listItems").innerHTML = `<tr>
 																<th class="text-white">Fotos</th>
 																<th class="text-white">Títol</th>
-																<th class="text-white">Contingut</th>
+																<th class="text-white">Estado</th>
+                                                                <th class="text-white">Comentari</th>
+                                                                <th></th>
+                                                                <th></th>
                                                                 <th>
                                                                     <input type='search' name='busquedaItems' id='busquedaItems' placeholder='Busqueda... '>
                                                                     <button type='button' onclick='searchItems()' class='btn btn-default'>Buscar</button></th>
@@ -99,24 +123,27 @@ function loadItems(busqueda = "", limite = 5, usuari = false) {
 															</tr>`;
             }
             arrayItems.forEach((doc) => {
-                console.log(doc);
-                let image = "";
-                if (doc.data().image != null) {
-                    image = `<img src="${doc.data().image}" class="rounded" style="max-width: 100px; max-height: 100px;" "alt="${doc.data().title}">`;
-                }
-                if (usuari) {
-                    document.getElementById("listItems").innerHTML += `<tr>
-                    <td>${image}</td>
-                    <td>${doc.data().title}</td>
-                    <td>${doc.data().content}</td>
-                    <td></td>
-                   
-                </tr>`;
-                } else {
-                    document.getElementById("listItems").innerHTML += `<tr>
+                selectById(estados, doc.data().estado.id).then((docEstado) => {
+                    console.log(doc);
+                    let image = "";
+                    if (doc.data().image != null) {
+                        image = `<img src="${doc.data().image}" class="rounded" style="max-width: 100px; max-height: 100px;" "alt="${doc.data().title}">`;
+                    }
+                    if (usuari) {
+                        document.getElementById("listItems").innerHTML += `<tr>
+                        <td>${image}</td>
+                        <td>${doc.data().title}</td>
+                        <td>${doc.data().content}</td>
+                        <td>${doc.data().comentari}</td>
+                        <td></td>
+                        </tr>`;
+                    } else {
+                        document.getElementById("listItems").innerHTML += `<tr>
                                                                     <td>${image}</td>
                                                                     <td>${doc.data().title}</td>
                                                                     <td>${doc.data().content}</td>
+                                                                    <td>${docEstado.data().estado}</td>
+                                                                    <td>${doc.data().comentari}</td>
                                                                     <td></td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-danger eliminarItem float-right" onclick="eliminar('${doc.id}', '${doc.data().image}')">
@@ -127,8 +154,9 @@ function loadItems(busqueda = "", limite = 5, usuari = false) {
                                                                         </button>
                                                                     </td>
                                                                 </tr>`;
-                }
-            })
+                    }
+                });
+            });
             document.getElementById("listItems").innerHTML += `<tr>
             <button type='button' onclick='sumapagines()' class='btn btn-default'>Ver mas</button>
             </td>
