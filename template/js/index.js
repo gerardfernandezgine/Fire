@@ -233,3 +233,8 @@ function searchFitxer() {
     let busqueda = $("#busquedaFitxeros").val();
     loadFicheros(busqueda);
 }
+
+function searchItems() {
+    let busqueda = $("#busquedaItems").val();
+    loadItems(busqueda);
+}

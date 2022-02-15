@@ -78,7 +78,10 @@ function loadItems() {
 																<th class="text-white">Fotos</th>
 																<th class="text-white">Títol</th>
 																<th class="text-white">Contingut</th>
-                                                                <th></th>
+                                                                <th>
+                                                                    <input type='search' name='busquedaItems id='busquedaItems' placeholder='Busqueda... '>
+                                                                    <button type='button' onclick='searchItems()' class='btn btn-default'>Buscar</button></th>
+                                                                </th>
 															</tr>`;
             arrayItems.forEach((doc) => {
                 console.log(doc);
